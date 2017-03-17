@@ -28,8 +28,11 @@
 	
 	List<NoticeView> list = dao.getList(pg,f,query);
 	
+	Thread.sleep(3000);
+	
 	Gson gson = new Gson();
 	String json = gson.toJson(list);
+	
 %>
 <%=json %>
 	
