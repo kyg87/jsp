@@ -278,7 +278,7 @@ nav>.h2 {
 					<%for(NoticeView v : list) {%>
 						<tr>
 							<td><%=v.getTitle() %></td>
-							<td><%=v.getTitle()%></td>
+							<td><a href ="notice-detail.jsp?c=<%=v.getCode()%>"><%=v.getTitle()%></a></td>
 							<td><%=v.getWriterName() %></td>
 							<td>2016-09-21</td>
 							<td>776</td>

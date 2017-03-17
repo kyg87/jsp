@@ -122,35 +122,38 @@
                </ul>
             </div>
                
-            <form action="notice-reg-proc.jsp" method="post">
-            <table border="1">
-               <tbody>
-                  <tr>
-                     <th>제목</th>
-                     <td><%=n.getTitle()%></td>
-                  </tr>
-				 <tr>
-                     <th>작성자</th>
-                     <td><%=n.getWriter()%></td>
-                  </tr>
-                  <tr>
-                     <th>작성일</th>
-                     <td><%=n.getRegDate()%></td>
-                  </tr>
-                  <tr>
-                     <th>조회수</th>
-                     <td><%=n.getHit()%></td>
-                  </tr>
-                  <tr>
-                     <td colspan="2"></td>
-                  </tr>
-     
-               </tbody>
-            </table>
-            <div>      
-               <a href="notice-edit.jsp?c=<%=n.getCode()%>">수정</a>
-               <a href="notice-del-proc.jsp?c=<%=n.getCode()%>">삭제</a>
-            </div>
+            <form action="notice-edit-proc.jsp" method="post">
+	            <table border="1">
+	               <tbody>
+	                  <tr>
+	                     <th>제목</th>
+	                     <td><input name ="title" type ="text" value = "<%=n.getTitle()%>"/></td>
+	                  </tr>
+					 <tr>
+	                     <th>작성자</th>
+	                     <td><%=n.getWriter()%></td>
+	                  </tr>
+	                  <tr>
+	                     <th>작성일</th>
+	                     <td><%=n.getRegDate()%></td>
+	                  </tr>
+	                  <tr>
+	                     <th>조회수</th>
+	                     <td><%=n.getHit()%></td>
+	                  </tr>
+	                  <tr>
+	                     <td colspan="2">
+	                     <textarea rows="20" cols="80" name = "content"></textarea> <%=n.getContent()%>
+	                     </td>
+	                  </tr>
+	     
+	               </tbody>
+	            </table>
+	            <div>
+	               <input type ="hidden" name ="code" value ="<%=code%>"/>   
+	               <input type ="submit" value ="저장"/><!--  href="notice-edit.jsp">수정</a> -->
+	               <a href="notice-detail.jsp?c=<%=code%>"> 취소 </a>
+	            </div>
             </form>            
          </main>
          

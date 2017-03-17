@@ -177,4 +177,129 @@ public class MySQLNoticeDao implements NoticeDao{
 		return add(notice);
 	}
 
+	@Override
+	public NoticeView get(String code) {
+		String sql = "SELECT * FROM NOTICE_VIEW Where CODE = ?";
+
+		NoticeView noticeView = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			String url = "jdbc:mysql://211.238.142.84/newlecture?autoReconnect=true&amp;useSSL=false&characterEncoding=UTF-8"; // DB����
+			Connection con = DriverManager.getConnection(url, "newlec", "sclass"); // ����̺� �ε�
+			PreparedStatement st = con.prepareStatement(sql);
+			
+			st.setString(1,code);
+		
+			
+			ResultSet rs = st.executeQuery();
+			
+		
+
+			if (rs.next()) {
+				
+				noticeView = new NoticeView();
+				noticeView.setCode(rs.getString("CODE"));
+				noticeView.setTitle(rs.getString("TITLE"));
+				noticeView.setWriter(rs.getString("WRITER"));
+				noticeView.setContent(rs.getString("CONTENT"));
+				noticeView.setRegDate(rs.getDate("REGDATE"));
+				noticeView.setHit(rs.getInt("HIT"));
+				
+				noticeView.setWriterName(rs.getString("WRITER_NAME"));
+				noticeView.setCommentCount(rs.getInt("COMMENT_COUNT"));
+
+			}
+
+			rs.close();
+			st.close();
+			con.close();
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return noticeView;
+	}
+
+	@Override
+	public int update(Notice notice) {
+		
+		
+		String sql = "UPDATE NOTICE SET TITLE =?,CONTENT =? WHERE CODE =?";
+		
+		int result = 0;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			String url = "jdbc:mysql://211.238.142.84/newlecture?autoReconnect=true&amp;useSSL=false&characterEncoding=UTF-8"; // DB����
+			Connection con = DriverManager.getConnection(url, "newlec", "sclass"); // ����̺� �ε�
+			
+			PreparedStatement st = con.prepareStatement(sql);
+
+			st.setString(1,notice.getTitle());
+			st.setString(2,notice.getContent());
+			st.setString(3, notice.getCode());
+			
+			result = st.executeUpdate();
+
+			
+			st.close();
+			con.close();
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int delete(String code) {
+		
+		String sql = "DELETE FROM NOTICE WHERE CODE = ?";
+
+		int result = 0;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			String url = "jdbc:mysql://211.238.142.84/newlecture?autoReconnect=true&amp;useSSL=false&characterEncoding=UTF-8"; // DB����
+			Connection con = DriverManager.getConnection(url, "newlec", "sclass"); // ����̺� �ε�
+	
+			PreparedStatement st = con.prepareStatement(sql);
+			
+			st.setString(1,code);
+	
+			result = st.executeUpdate();
+		
+			st.close();
+			con.close();
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int update(String title, String content, String code) {
+		
+		Notice notice = new Notice();
+		notice.setCode(code);
+		notice.setTitle(title);
+		notice.setContent(content);
+		
+		return update(notice);
+	}
+
 }
