@@ -1,0 +1,107 @@
+
+#header{
+   height: 70px;
+   
+}
+
+#visual {
+   height:171px;
+   background: #313131 url("../../images/bg-visual.png") no-repeat center;
+   border-top: 3px solid #8CBA34;
+   
+   background-attachment: scroll;
+   overflow: scroll;
+   
+}
+
+/* min-height : 배경 1순위 */
+#body {
+   min-height: 300px;
+   border-top: 5px solid #8CBA34;
+   margin-top: 1px;
+}
+
+#body .content-container{
+   background: url("../../images/bg-body.png") repeat-y left;
+}
+
+#footer{
+   height: 100px;
+   background: #313131;
+}
+
+.content-container{
+   width:960px;
+   height:100%;
+   margin-left:auto;
+   margin-right:auto;
+   min-height:inherit;
+   position: relative;
+   
+}
+
+#aside{
+   float:left;
+   width:205px;
+/*    height:300px; */
+   background: yellow url("../../images/bg-aside-title.png") no-repeat top;
+}
+
+/* position : static(기본), absolute(문서기준), fixed(화면기준), relative(static기준) */
+#quick-menu{
+   postiton: absolute;
+   left:100px;
+   top:100px;
+   
+   width:100px;
+   height:100px;
+   
+   border: 1px solid red;
+}
+
+
+#main{
+   box-sizing:border-box;
+   position: relative;
+   float:left;
+   width:755px;
+   height:300px;
+   
+   padding-left: 45px;
+   padding-top: 45px;
+}
+
+
+
+
+
+
+#lectur-serch-form{
+	position: absolute;
+	border:  solid 5px #8cba34;
+	width: 308px;
+	height: 25px;
+	
+	left: 468px;
+	top: 21px;
+	
+}
+#lectur-serch-form{
+width: 308px;
+height: 25px;
+border: 5px solid #8cba34;
+}
+
+#lectur-serch-form fieldset label{
+	background: red;
+}
+
+#lectur-serch-form fieldset input[type ="text"]{
+	display: block;
+	width: 222px;
+	height: 25px;
+	border: 0px;
+	float: left;
+}
+
+
