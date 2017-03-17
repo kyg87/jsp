@@ -6,13 +6,14 @@
    
 	String title = request.getParameter("title");
 	String content = request.getParameter("content");
+	String code = request.getParameter("c");
 	
 	NoticeDao noticeDao = new MySQLNoticeDao();
-	int result = noticeDao.add(title,content,"kkkkk");
+	int result = noticeDao.delete(code);
 	
 	System.out.println(result);
 	if(result > 0)
-		response.sendRedirect("notice.jsp");	
+		response.sendRedirect("notice.jsp");		
 	
 		
 
