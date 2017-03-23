@@ -17,6 +17,7 @@
 /* 			var inputs = p1.getElementsByTagName("input"); */
 			 
 			var inputs = document.querySelectorAll("#p1 > input");
+			alert(inputs.length);
 			for(var v in inputs)
 			{
 				inputs[v].value = "오케ㅔ케켘";
@@ -141,7 +142,8 @@
 	<input id="run-button" type="button" value="실행" />
 	<div>
 		<font>font</font> <input />
-	</div><form id="p1">
+	</div>
+	<form id="p1">
 		test1 
 		<input /> 
 		<input />

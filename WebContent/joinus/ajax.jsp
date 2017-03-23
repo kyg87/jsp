@@ -408,12 +408,60 @@ Latest compiled and minified JavaScript
 							window.addEventListener("load", function(e) {
 							
 								var moreButton = document.querySelector("#more-button");
+								var regButton = document.querySelector("#reg-button");
 								/* var notices = [
 									{code:"1", title:"오오오"},
 									{code:"2", title:"요요요"},
 									{code:"3", title:"유유유"}
 									]; */
 								
+								regButton.onclick = function(){
+									var request = new window.XMLHttpRequest();
+									request.open("GET", "notice-reg-partial.jsp", true);
+									//request.onreadystatechange = function(){
+									request.onload = function(){
+										
+										var screen = document.createElement("div");
+										screen.style.width = "100%";
+										screen.style.height = "100%";
+										screen.style.position = "fixed";
+										screen.style.left = "0px";
+										screen.style.top = "0px";
+										screen.style.background = "#000";
+										screen.style.opacity = "0.5";	
+										document.body.appendChild(screen);
+										
+										var formScreen = document.createElement("div");
+										formScreen.style.width = "100%";
+										formScreen.style.height = "100%";
+										formScreen.style.position = "fixed";
+										formScreen.style.left = "0px";
+										formScreen.style.top = "0px";
+										
+										document.body.appendChild(formScreen);
+										
+										var formText = request.responseText;
+										
+										formScreen.innerHTML += formText;
+
+										var form = formScreen.querySelector("form");
+										form.style.background = "#fff";
+										form.style.width = "600px";
+										form.style.margin = "auto";
+										form.style.borderRadius = "2px";
+										form.style.position = "relative";
+										form.style.top = "50%";
+										form.style.transform = "translateY(-50%)";
+
+										var script = formScreen.querySelector("script");
+										
+										eval(script.textContent);
+										
+									};
+									request.send();
+
+									return false;
+								}
 
 								
 								moreButton.onclick = function(){
@@ -427,9 +475,9 @@ Latest compiled and minified JavaScript
 									/* var request = new ActiveXObject("Microsoft.XMLHTTP"); */
 									var request = new window.XMLHttpRequest();
 									request.open("GET", "ajax-data.jsp?p=2", true);
-									request.onreadystatechange = function(){
-										
-										if(request.readyState ==4) {
+									//request.onreadystatechange = function(){
+									request.onload = function(){	
+										//if(request.readyState ==4) {
 										var notices = JSON.parse(request.responseText);
 										
 										var template = document.querySelector("#notice-row");
@@ -447,7 +495,7 @@ Latest compiled and minified JavaScript
 										
 										document.body.removeChild(screen);
 										
-										};
+										//};
 									};
 									request.send();
 									
@@ -542,6 +590,8 @@ Latest compiled and minified JavaScript
 
 			<div>
 				<a href="notice-reg.jsp">글쓰기</a> <span id="more-button">더보기</span>
+				
+				<a id="reg-button" href="notice-reg.jsp">등록</a> 
 			</div>
 			</main>
 		</div>

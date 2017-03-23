@@ -1,16 +1,26 @@
-<%@page import="com.newlecture.web.data.view.NoticeView"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page import="com.newlecture.web.data.dao.NoticeDao"%>
-<%@page import="com.newlecture.web.dao.mysql.MySQLNoticeDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
    
-	String code = request.getParameter("c");
+/* 	String code = request.getParameter("c");
 
 	NoticeDao dao = new MySQLNoticeDao();
 	
 	NoticeView n = dao.get(code);
+	
+	NoticeView prev = dao.prev(code);
+	NoticeView next = dao.next(code);
+	
+	NoticeFileDao noticeFileDao = new MySQLNoticeFileDao();
+	
+	List<NoticeFile> list = noticeFileDao.getList(n.getCode());
+	
+	System.out.println(list.size());
+/* 	System.out.println(dao.prev(code).getCode());
+	System.out.println(dao.next(code).getCode()); */ 
 
 %>
 
@@ -127,19 +137,40 @@
                <tbody>
                   <tr>
                      <th>제목</th>
-                     <td><%=n.getTitle()%></td>
+                     <td>${n.title}</td>
                   </tr>
 				 <tr>
                      <th>작성자</th>
-                     <td><%=n.getWriter()%></td>
+                     <td>${n.writer}</td>
                   </tr>
                   <tr>
                      <th>작성일</th>
-                     <td><%=n.getRegDate()%></td>
+                     <td>${n.regDate}</td>
                   </tr>
                   <tr>
                      <th>조회수</th>
-                     <td><%=n.getHit()%></td>
+                     <td>${n.hit}</td>
+                  </tr>
+                  <tr>
+                     <th>첨부파일</th>
+          <%--            <%
+                  
+                     String hbs = "롤,코딩,자기,먹기";
+                     
+                     pageContext.setAttribute("hbs",hbs);
+                     
+                     %>
+             		<c:forTokens var="hb" items="${hbs }" delims=",">
+             		
+             		${hb }<br/>
+             		</c:forTokens> --%>
+                     
+                     
+                     <c:forEach var="f" items="${list}">
+                     
+                     <a href ="upload/${f.src }">${f.src}</a>
+                     
+                     </c:forEach>
                   </tr>
                   <tr>
                      <td colspan="2"></td>
@@ -147,11 +178,35 @@
      
                </tbody>
             </table>
-            <div>      
-               <a href="notice-edit.jsp?c=<%=n.getCode()%>">수정</a>
-               <a href="notice-del-proc.jsp?c=<%=n.getCode()%>">삭제</a>
+            <div>
+               <a href="notice.jsp">목록</a>      
+               <a href="notice-edit.jsp?c=${n.code}">수정</a>
+               <a href="notice-del-proc.jsp?c=${n.code}">삭제</a>
             </div>
-            </form>            
+				<div>
+					<ul>
+						<li>
+							<span>이전글:</span>
+							<c:if test="${ empty prev}">
+							<span>이전글이 없습니다.</span>
+							</c:if>
+							<c:if test="${not next}">
+							<a href="notice-detail.jsp?c=${prev.code}">${prev["title"]}</a>
+							</c:if>
+						</li>
+						<li>
+							
+							<span>다음:</span>
+							<c:if test="${ empty next}">
+							<span>다음 글이 없습니다.</span>
+							</c:if>
+							<c:if test="${not next}">
+							<a href="notice-detail.jsp?c=${next.code}">${next["title"]}</a>
+							</c:if>
+						</li>
+					</ul>
+				</div>
+			</form>            
          </main>
          
       </div>

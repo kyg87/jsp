@@ -21,4 +21,11 @@ public interface NoticeDao {
 	
 	int add(Notice notice);
 	int add(String title, String content, String writer);
+	
+	NoticeView prev(String code);
+	NoticeView next(String code);
+	
+	String lastCode();
+	
+	
 }

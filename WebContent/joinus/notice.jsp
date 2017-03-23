@@ -1,36 +1,6 @@
-<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
-<%@page import="com.newlecture.web.data.view.NoticeView"%>
-<%@page import="java.util.List"%>
-<%@page import="com.newlecture.web.data.dao.NoticeDao"%>
-<%@page import="com.newlecture.web.dao.mysql.MySQLNoticeDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	
-	String _page = request.getParameter("p");
-	String _field = request.getParameter("f");
-	String _query = request.getParameter("q");
-	
-	int pg = 1;
-	String f = "TITLE";
-	String query = "";
-	
-	if(_page != null && !_page.equals("")){
-		pg = Integer.parseInt(_page);
-	}
-	if(_field != null && !_field.equals("")){
-		f = _field;
-	}
-	if(_query != null && !_query.equals("")){
-		query = _query;
-	}
-
-	NoticeDao dao = new MySQLNoticeDao();
-	
-	List<NoticeView> list = dao.getList(pg,f,query);
-	
-	int size = dao.getSize(f,query);
-%>    
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -197,26 +167,31 @@ nav>.h2 {
 				</ul>
 			</div>
 
-			<form>
-				<fieldset>
-					<legend class="hidden">검색필드</legend>
-					<label class="hidden">검색분류</label>
-					 <select name = "f">
-						<option value ="TITLE" <%if(f.equals("TITLE")){%>selected<%} %>>제목</option>
-						<option value = "CONTENT" <%if(f.equals("CONTENT")){%>selected<%} %>>내용</option>
-					</select> 
-					<label>검색어</label> 
-					<input name ="q" type="text" value = "<%=query%>" placeholder="검색어를 입력하세요" />
-					<input class="btn btn-search" type="submit" value="검색" />
-					<input type = "hidden" name ="p" value = "1"/> 
-				</fieldset>
-			</form>
+	<form>
+               <fieldset>
+                  <legend class="hidden">검색필드</legend>
+                  <label class="hidden">검색분류</label> <select name="f">
+                     <c:if test="${param.f == 'TITLE' }">
+                        <c:set var="selTitle" value="selected" />
+                     </c:if>
+                     <c:if test="${param.f == 'CONTENT' }">
+                        <c:set var="selContent" value="selected" />
+                     </c:if>
+                     
+                     <option value="TITLE"${selTitle}>제목</option>
+                     <option value="CONTENT"${selContent}>내용</option>
+                  </select> <label class="hidden">검색어</label> 
+                  <input name="q" type="text" value="${parm.q }" placeholder="검색어를 입력하세요" /> 
+                  <input class="btn btn-search" type="submit" value="검색" /> 
+                  <input type="hidden" name="p" value="1" />
+               </fieldset>
+            </form>
 
 
 			<h2>검색</h2>
 
 			<div class="notice">
-				<h3>공지목록 [<%=size%>]</h3>
+				<h3>공지목록 [${size}]</h3>
 				<script type="text/javascript">
 					window.addEventListener("load", function() {
 						
@@ -275,28 +250,27 @@ nav>.h2 {
 						</tr>
 					</thead>
 					<tbody>
-					<%for(NoticeView v : list) {%>
+					<c:forEach var="f" items="${list}">
 						<tr>
-							<td><%=v.getTitle() %></td>
-							<td><a href ="notice-detail.jsp?c=<%=v.getCode()%>"><%=v.getTitle()%></a></td>
-							<td><%=v.getWriterName() %></td>
-							<td>2016-09-21</td>
-							<td>776</td>
+							<td>${f.title }</td>
+							<td><a href ="notice-detail?c=${f.code}">${f.title}</a></td>
+							<td>${f.writerName }</td>
+							<td>${f.regDate }</td>
+							<td>${f.hit }</td>
 						</tr>
-					<% }%>
+					</c:forEach>
 					</tbody>
 				</table>
 			</div>
-			<%
-				int last = (size %10) > 0 ? size/10 + 1: size/10;
-			%>
 			<div class="margin">
                <div><a href="">이전</a></div>
                <ul>
-	               <%for(int i = 0; i < last;i++) {%>
-	               <li><a href="?p=<%=i+1 %>&f=<%=f%>&q=<%=query%>"><%=i+1 %></a></li>
+               	<c:forEach var="data" begin="0" end="${last}" varStatus="st">
+	               
+	               <li><a href="?p=${st.index + 1}&f=${parm.f }&q=${parm.q}">${st.index + 1 }</a></li>
 	                  
-	               <%} %>
+	               
+	            </c:forEach>
                </ul>
                <div><a href="">다음</a></div>
             </div>    

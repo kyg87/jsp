@@ -118,13 +118,17 @@
                </ul>
             </div>
                
-            <form action="notice-reg-proc.jsp" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
             <table border="1">
                <tbody>
                   <tr>
                      <th>제목</th>
                      <td><input type="text" name = "title"/></td>
                   </tr>
+                     <th>파일</th>
+                     <td><input type="file" name = "file1"/></td>
+                     <th>파일</th>
+                     <td><input type="file" name = "file2"/></td>
                   <tr>                  
                      <td colspan="2">
                         <textarea rows="20" cols="80" name ="content"></textarea>

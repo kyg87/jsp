@@ -302,4 +302,135 @@ public class MySQLNoticeDao implements NoticeDao{
 		return update(notice);
 	}
 
+	@Override
+	public NoticeView prev(String code) {
+		String sql = "SELECT * FROM NOTICE_VIEW WHERE CAST(CODE AS unsigned) > CAST(? AS unsigned) ORDER BY REGDATE ASC limit 0,1";
+
+		NoticeView noticeView = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			String url = "jdbc:mysql://211.238.142.84/newlecture?autoReconnect=true&amp;useSSL=false&characterEncoding=UTF-8"; // DB����
+			Connection con = DriverManager.getConnection(url, "newlec", "sclass"); // ����̺� �ε�
+			PreparedStatement st = con.prepareStatement(sql);
+			
+			st.setString(1,code);
+		
+			
+			ResultSet rs = st.executeQuery();
+			
+		
+
+			if (rs.next()) {
+				
+				noticeView = new NoticeView();
+				noticeView.setCode(rs.getString("CODE"));
+				noticeView.setTitle(rs.getString("TITLE"));
+				noticeView.setWriter(rs.getString("WRITER"));
+				noticeView.setContent(rs.getString("CONTENT"));
+				noticeView.setRegDate(rs.getDate("REGDATE"));
+				noticeView.setHit(rs.getInt("HIT"));
+				
+				noticeView.setWriterName(rs.getString("WRITER_NAME"));
+				noticeView.setCommentCount(rs.getInt("COMMENT_COUNT"));
+
+			}
+
+			rs.close();
+			st.close();
+			con.close();
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return noticeView;
+	}
+
+	@Override
+	public NoticeView next(String code) {
+		String sql = "SELECT * FROM NOTICE_VIEW WHERE CAST(CODE AS unsigned) < CAST( ? AS unsigned) ORDER BY REGDATE desc limit 0,1";
+
+		NoticeView noticeView = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			String url = "jdbc:mysql://211.238.142.84/newlecture?autoReconnect=true&amp;useSSL=false&characterEncoding=UTF-8"; // DB����
+			Connection con = DriverManager.getConnection(url, "newlec", "sclass"); // ����̺� �ε�
+			PreparedStatement st = con.prepareStatement(sql);
+			
+			st.setString(1,code);
+		
+			
+			ResultSet rs = st.executeQuery();
+			
+		
+
+			if (rs.next()) {
+				
+				noticeView = new NoticeView();
+				noticeView.setCode(rs.getString("CODE"));
+				noticeView.setTitle(rs.getString("TITLE"));
+				noticeView.setWriter(rs.getString("WRITER"));
+				noticeView.setContent(rs.getString("CONTENT"));
+				noticeView.setRegDate(rs.getDate("REGDATE"));
+				noticeView.setHit(rs.getInt("HIT"));
+				
+				noticeView.setWriterName(rs.getString("WRITER_NAME"));
+				noticeView.setCommentCount(rs.getInt("COMMENT_COUNT"));
+
+			}
+
+			rs.close();
+			st.close();
+			con.close();
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return noticeView;
+	}
+
+	@Override
+	public String lastCode() {
+		
+		String codeSql = "SELECT MAX(cast(CODE as unsigned)) CODE FROM NOTICE_VIEW";
+		
+		String lastCode = "1";
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			String url = "jdbc:mysql://211.238.142.84/newlecture?autoReconnect=true&amp;useSSL=false&characterEncoding=UTF-8"; // DB����
+			Connection con = DriverManager.getConnection(url, "newlec", "sclass"); // 
+			Statement st = con.createStatement();
+			
+			
+			
+			
+			ResultSet rs = st.executeQuery(codeSql);
+			if(rs.next())
+				lastCode = rs.getString("CODE");
+			
+
+			rs.close();
+			st.close();
+			con.close();
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return lastCode;
+	}
+
 }
