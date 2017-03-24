@@ -1,23 +1,27 @@
-package com.newlecture.web.controller;
+package com.newlecture.web.controller.account;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/index")
-public class IndexController extends HttpServlet{
+/**
+ * Servlet implementation class LogOutController
+ */
+@WebServlet("/LogOutController")
+public class LogOutController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
 
-	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		
-		
-		request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
+
+		request.getSession().invalidate();
+		response.sendRedirect("../index");
+
 	}
-	
+
+
+
 }

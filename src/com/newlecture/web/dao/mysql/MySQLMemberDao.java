@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.newlecture.web.data.dao.MemberDao;
 import com.newlecture.web.data.entity.Member;
+import com.newlecture.web.data.view.NoticeView;
 
 public class MySQLMemberDao implements MemberDao {
 
@@ -21,8 +22,8 @@ public class MySQLMemberDao implements MemberDao {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			
-			String url = "jdbc:mysql://211.238.142.84/newlecture?autoReconnect=true&amp;useSSL=false"; // DB¿¬°á
-			Connection con = DriverManager.getConnection(url, "newlec", "sclass"); // µå¶óÀÌºê ·Îµå
+			String url = "jdbc:mysql://211.238.142.84/newlecture?autoReconnect=true&amp;useSSL=false"; // DBì—°ê²°
+			Connection con = DriverManager.getConnection(url, "newlec", "sclass"); // ë“œë¼ì´ë¸Œ ë¡œë“œ
 			PreparedStatement st = con.prepareStatement(sql);
 			ResultSet rs = st.executeQuery();
 			
@@ -52,7 +53,7 @@ public class MySQLMemberDao implements MemberDao {
 	@Override
 	public int add(Member member) {
 		
-		String sql = "INSERT INTO MEMBER(MID,PWD,NAME,PHONE,REGDATE) VALUES(?,?,?,?,SYSDATE)"; // Member°¡ °®°í ÀÖ´Â°ÍÀ» ²È¾Æ³Ö´Â ÀÛ¾÷
+		String sql = "INSERT INTO MEMBER(MID,PWD,NAME,PHONE,REGDATE) VALUES(?,?,?,?,SYSDATE)"; // Memberê°€ ê°–ê³  ìˆëŠ”ê²ƒì„ ê½‚ì•„ë„£ëŠ” ì‘ì—…
 		List<Member> list = new ArrayList<>();
 		
 		try {
@@ -60,16 +61,16 @@ public class MySQLMemberDao implements MemberDao {
 			
 			String url = "jdbc:oracle:thin:@211.238.142.251:1521:orcl"; 
 			Connection con = DriverManager.getConnection(url, "c##sist", "dclass"); 
-			// Statement st = con.createStatement(); // ²È¾Æ³Ö´Â ´É·ÂÀº ¾ø°í ½ÇÇà¸¸ °¡´É
+			// Statement st = con.createStatement(); // ê½‚ì•„ë„£ëŠ” ëŠ¥ë ¥ì€ ì—†ê³  ì‹¤í–‰ë§Œ ê°€ëŠ¥
 			PreparedStatement st = con.prepareStatement(sql);			
 			st.setString(1, member.getId());
 			st.setString(2, member.getPwd());
 			st.setString(3, member.getName());
 			st.setString(4, member.getPhone());
 
-			// °á°ú°¡ ÀÖ´Â Äõ¸® executeQuery()
+			// ê²°ê³¼ê°€ ìˆëŠ” ì¿¼ë¦¬ executeQuery()
 			// SELECT
-			// °á°ú°¡ ¾ø´Â Äõ¸® executeUpdate()
+			// ê²°ê³¼ê°€ ì—†ëŠ” ì¿¼ë¦¬ executeUpdate()
 			// INSERT, UPDATE, DELETE
 			int result = st.executeUpdate();
 			
@@ -85,6 +86,47 @@ public class MySQLMemberDao implements MemberDao {
 		}
 		
 		return 0;
+	}
+
+	@Override
+	public Member get(String id) {
+		String sql = "SELECT * FROM MEMBER WHERE ID = ?";
+
+		Member member = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			String url = "jdbc:mysql://211.238.142.84/newlecture?autoReconnect=true&amp;useSSL=false&characterEncoding=UTF-8"; // DBï¿½ï¿½ï¿½ï¿½
+			Connection con = DriverManager.getConnection(url, "newlec", "sclass"); // ï¿½ï¿½ï¿½ï¿½Ìºï¿½ ï¿½Îµï¿½
+			PreparedStatement st = con.prepareStatement(sql);
+			
+			st.setString(1,id);
+		
+			
+			ResultSet rs = st.executeQuery();
+			
+		
+
+			if (rs.next()) {
+				
+				member = new Member();
+				member.setId(rs.getString("ID"));
+				member.setPwd(rs.getString("PWD"));
+
+			}
+
+			rs.close();
+			st.close();
+			con.close();
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return member;
 	}
 
 }
