@@ -22,10 +22,17 @@
 	background: green;
 	width: 100px;
 	height: 50px;
-	transition-duration:10s 
+	transition-duration: 0.5s ;
+	transition-timing-function: steps(3,start);
+/* 	transition-property: width,opacity;
+	transition-timing-function: ease-in-out; */
 }
 #room div:hover{
-width: 200px;
+	transform-origin: right top;
+	transform: skew(-32deg, 23deg) ;
+/* 	width: 200px;
+	height: 200px;
+	opacity: 0.2; */
 	/* transform: rotate(7.5deg); */
 }
 </style>
