@@ -7,6 +7,7 @@
 			var regButton = document.querySelector(".reg-button");
 			regButton.onclick = function(){
 				
+				alert("!!!");
 				var form = document.querySelector("#form");
 				var formData = new FormData(form);
 				
@@ -36,7 +37,7 @@
 
 
 
- 	<form id="form" action="notice-reg-proc.jsp" method="post">
+ 	<form id="form" >
        
        <table border="1">
           <tbody>
@@ -58,7 +59,7 @@
        </table>
        
        <div>      
-          <input class="reg-button" type="submit" value="등록" />         
+          <input class="reg-button" type="button" value="등록" />         
           <a href="notice.jsp">취소</a>
        </div>
        
