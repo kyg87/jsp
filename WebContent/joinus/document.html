@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script>
+
+	window.addEventListener("load", function() {
+/* 	 		var p1 = document.getElementById("p1");
+			
+			var runButton = document.getElementById("run-button");
+	 */
+	 		var runButton = document.getElementById("run-button");
+	 
+			runButton.onclick = function() {
+/* 			var inputs = p1.getElementsByTagName("input"); */
+			 
+			var inputs = document.querySelectorAll("#p1 > input");
+			alert(inputs.length);
+			for(var v in inputs)
+			{
+				inputs[v].value = "오케ㅔ케켘";
+			}
+		};
+	});
+	
+	window.addEventListener("load", function() {
+
+	 		var changeButton = document.getElementById("change-button");
+	 		var img1 = document.getElementById("img1");
+	 		var srcText = document.getElementById("src-Text");
+	 		var borderText = document.getElementById("border-text");
+	 		var borderColor = document.getElementById("border-color");
+	 		
+	 		changeButton.onclick = function() {
+			 
+	 			/* img1.src =  "images/test1.jpg"; */
+	 			img1.src =  "images/" + srcText.value +".jpg";
+	 			img1.style.border = borderText.value;
+	 			img1.style.borderColor = borderColor.value;
+		};
+	});
+	
+	/* ---------------------------------------------------------------------------------------------- */
+	
+	window.addEventListener("load", function() {
+
+	 		var addButton = document.getElementById("add-button");
+	 		
+	 		
+	 		var container = document.getElementById("container");
+	 		
+	 		addButton.onclick = function() {
+	 			
+			var img = document.createElement("img");
+			
+			img.src = "images/test.jpg";
+
+	 		
+			container.appendChild(img);
+	 			
+			
+		};
+	});
+	
+	window.addEventListener("load", function() {
+
+ 		
+ 		var deleteButton = document.getElementById("delete-button");
+ 		
+ 		var container = document.getElementById("container");
+ 		
+ 		var cloneButton = document.getElementById("clone-button");
+ 		
+ 		/* down-button */
+ 		
+ 		var downButton = document.getElementById("down-button");
+ 		
+ 		var cursor = document.getElementById("cursor");
+ 		
+ 		deleteButton.onclick = function() {
+ 			
+	 	var last = container.querySelector("img:last-child");
+		
+		 container.removeChild(last);
+
+ 		
+		
+ 			
+		
+		};
+		
+		cloneButton.onclick = function(){
+			
+			var clone = container.cloneNode(true);
+			
+			/* var body1 = container.querySelector("body > div");
+			
+			
+			body1.appendChild(clone); */
+			
+			container.parentNode.appendChild(clone);
+		}
+		
+		downButton.onclick = function(){
+			
+			var parent = container.parentElement;
+			
+			var target = cursor.nextElementSibling;//커서 다음
+			
+			var old = parent.replaceChild(cursor, target);
+			
+			parent.insertBefore(old, cursor);
+		};
+		
+		
+});
+	
+	
+</script>
+</head>
+<body>
+	<input id ="add-button" type="button" value="이미지 추가"/>
+	<input id ="delete-button" type="button" value="이미지 삭제"/>
+	<input id ="clone-button" type="button" value="통째로 복제"/>
+	<input id ="down-button" type="button" value="밑으로"/>
+	<div>
+		<div id ="cursor">
+		cursor
+		</div>
+		<div id ="container">
+		</div>
+	</div>
+	<br/>
+   이미지<input id="src-Text" value="test"/><br />
+   보더<input id ="border-text" value="13px solid "/><br />
+   보더 칼라<input id ="border-color" value="#979797"/><br />
+   <input id="change-button" type="button"  value="변경" /><br />
+   <img id="img1" src="images/test.jpg" />   
+<hr/>
+	<input id="run-button" type="button" value="실행" />
+	<div>
+		<font>font</font> <input />
+	</div>
+	<form id="p1">
+		test1 
+		<input /> 
+		<input />
+	</form>
+
+	<p>para</p>
+	hello
+	<!-- 오마이 갓 뚜-->
+</body>
+</html>
