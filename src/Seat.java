@@ -23,5 +23,10 @@ public class Seat {
 		this.index = index;
 	}
 	
+	public void setSeat(int group,int index)
+	{
+		this.group = group;
+		this.index = index;
+	}
 	
 }
