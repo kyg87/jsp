@@ -29,7 +29,7 @@ public class LoginController extends HttpServlet{
 		// TODO Auto-generated method stub
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
-		
+		String url = request.getParameter("return-url");
 		Member member = new MySQLMemberDao().get(id);
 		
 		HttpSession session = request.getSession();
@@ -50,7 +50,14 @@ public class LoginController extends HttpServlet{
 		
 		if(validate)
 		{
-			response.sendRedirect("../index");
+			
+			
+			if(url != null)
+			{
+				response.sendRedirect(url);
+			}
+			else
+				response.sendRedirect("../index");
 		}
 		
 		else{

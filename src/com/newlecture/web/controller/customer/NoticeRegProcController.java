@@ -23,6 +23,8 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 @WebServlet("/joinus/notice-reg-proc")
 public class NoticeRegProcController extends HttpServlet{
 
+	
+	
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -36,11 +38,7 @@ public class NoticeRegProcController extends HttpServlet{
 				, 1024*1024*10
 				, "UTF-8"
 				, new DefaultFileRenamePolicy());
-/*		File d = new File(path);
-		if(!d.exists())
-			d.mkdir();
-*/	 	
-				
+
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		
@@ -50,38 +48,7 @@ public class NoticeRegProcController extends HttpServlet{
 		out.println("1");
 		
 		
-	 	/*NoticeDao noticeDao = new MySQLNoticeDao();
-	 	
-		int result = noticeDao.add(title,content,"kkkkk");
-		String noticeCode = noticeDao.lastCode();
-		
-		NoticeFileDao noticeFileDao = new MySQLNoticeFileDao();
-		
-		Enumeration fnames = req.getFileNames();
-		
-		while(fnames.hasMoreElements()){
-			String f = (String)fnames.nextElement();
-			String fname = req.getFilesystemName(f);
-			
-			NoticeFile file = new NoticeFile();
-			
-			file.setNoticeCode(noticeCode);
-			file.setSrc(fname);
-			
-			noticeFileDao.add(file);
-			
-			out.println("<br/>" + f);
-			out.println("<br/>" + fname);
-			
-		}
-		
-		out.println("<br/>" + title);
-		out.println("<br/>" + content); 
 
-		
-		System.out.println(result);
-	 	if(result > 0)
-			response.sendRedirect("notice.jsp");	*/ 
 		
 	 	
 			

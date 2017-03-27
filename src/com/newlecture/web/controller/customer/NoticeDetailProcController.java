@@ -41,7 +41,7 @@ public class NoticeDetailProcController extends HttpServlet{
 	request.setAttribute("prev", prev);
 	request.setAttribute("next", next);
 	request.setAttribute("list", list);
-
-	request.getRequestDispatcher("notice-detail.jsp").forward(request, response);
+	/*request.getRequestDispatcher("/WEB-INF/views/joinus/notice-reg.jsp").forward(request, response);*/
+	request.getRequestDispatcher("/WEB-INF/views/joinus/notice-detail.jsp").forward(request, response);
  }			
 }

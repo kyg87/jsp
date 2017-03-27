@@ -180,7 +180,7 @@
             </table>
             <div>
                <a href="notice.jsp">목록</a>      
-               <a href="notice-edit.jsp?c=${n.code}">수정</a>
+               <a href="notice-edit?c=${n.code}">수정</a>
                <a href="notice-del-proc.jsp?c=${n.code}">삭제</a>
             </div>
 				<div>
@@ -190,7 +190,7 @@
 							<c:if test="${ empty prev}">
 							<span>이전글이 없습니다.</span>
 							</c:if>
-							<c:if test="${not next}">
+							<c:if test="${not empty next}">
 							<a href="notice-detail.jsp?c=${prev.code}">${prev["title"]}</a>
 							</c:if>
 						</li>
@@ -200,7 +200,7 @@
 							<c:if test="${ empty next}">
 							<span>다음 글이 없습니다.</span>
 							</c:if>
-							<c:if test="${not next}">
+							<c:if test="${not empty next}">
 							<a href="notice-detail.jsp?c=${next.code}">${next["title"]}</a>
 							</c:if>
 						</li>
