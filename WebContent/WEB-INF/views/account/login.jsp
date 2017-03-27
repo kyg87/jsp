@@ -9,7 +9,7 @@
 </head>
 <body>
 	<header>
-		<a href="../index">Home</a> 
+		<a href="../index.jsp">Home</a> 
 		<a href="../account/login">로그인</a>
 		<a href="../account/join">회원가입</a> 
 		<a href="../joinus/notice">고객센터</a>

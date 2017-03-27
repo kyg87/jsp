@@ -122,7 +122,7 @@
                </ul>
             </div>
                
-            <form action="notice-edit-proc.jsp" method="post">
+            <form action="notice-edit" method="get">
 	            <table border="1">
 	               <tbody>
 	                  <tr>

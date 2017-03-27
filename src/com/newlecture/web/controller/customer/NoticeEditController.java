@@ -1,6 +1,8 @@
 package com.newlecture.web.controller.customer;
 
 import java.io.IOException;
+import java.util.Enumeration;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.newlecture.web.dao.mysql.MySQLNoticeDao;
 import com.newlecture.web.data.dao.NoticeDao;
+import com.newlecture.web.data.entity.NoticeFile;
 import com.newlecture.web.data.view.NoticeView;
 
 /**
@@ -23,7 +26,7 @@ public class NoticeEditController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String code = request.getParameter("c");
-		
+		System.out.println("code : " + code);
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		
@@ -57,14 +60,26 @@ public class NoticeEditController extends HttpServlet {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String code = request.getParameter("code");
+		String c = request.getParameter("c");
+/*		Enumeration fnames = request.getParameterNames();
+		
+		
+		while(fnames.hasMoreElements()){
+			String f = (String)fnames.nextElement();
+	
+			System.out.println(f);
+			
+		}*/
 		
 		NoticeDao noticeDao = new MySQLNoticeDao();
+		
+		
 		/* int result = noticeDao.add(title,content,"kkkkk"); */
 		
-		int result = noticeDao.update(title,content,code);
+		int result = noticeDao.update(title,content,c);
 		System.out.println(result);
 		if(result > 0)
-			response.sendRedirect("notice-detail.jsp?c="+code);	
+			response.sendRedirect("notice-detail?c="+c);	
 		
 			
 	}

@@ -122,7 +122,7 @@
                </ul>
             </div>
                
-            <form action="notice-edit-proc.jsp" method="post">
+            <form  method="post">
 	            <table border="1">
 	               <tbody>
 	                  <tr>
@@ -143,16 +143,18 @@
 	                  </tr>
 	                  <tr>
 	                     <td colspan="2">
-	                     <textarea rows="20" cols="80" name = "content"></textarea>${n.content}
+	                     <textarea rows="20" cols="80" name = "content">${n.content}</textarea>
 	                     </td>
 	                  </tr>
 	     
 	               </tbody>
 	            </table>
 	            <div>
+
 	               <input type ="hidden" name ="code" value ="${parm.code}"/>   
+	           
 	               <input type ="submit" value ="저장"/><!--  href="notice-edit.jsp">수정</a> -->
-	               <a href="notice-detail.jsp?c=${parm.code }"> 취소 </a>
+	               <a href="notice-detail?c=${parm.code }"> 취소 </a>
 	            </div>
             </form>            
          </main>

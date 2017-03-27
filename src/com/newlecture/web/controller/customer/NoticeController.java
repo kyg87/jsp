@@ -17,8 +17,7 @@ import com.newlecture.web.data.view.NoticeView;
 public class NoticeController extends HttpServlet{
 
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String _page = request.getParameter("p");
 		String _field = request.getParameter("f");
@@ -57,7 +56,8 @@ public class NoticeController extends HttpServlet{
 	/*	request.setAttribute("f", f);
 		request.setAttribute("query", query);*/
 		
-		request.getRequestDispatcher("notice.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/joinus/notice.jsp").forward(request, response);
 		
 	}
+
 }

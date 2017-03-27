@@ -152,6 +152,13 @@
                      <td>${n.hit}</td>
                   </tr>
                   <tr>
+	                 <td colspan="2">
+	                     <textarea rows="20" cols="80" name = "content">${n.content}</textarea>
+	                 </td>
+	              </tr>
+	                  
+                  <tr>
+                  <tr>
                      <th>첨부파일</th>
           <%--            <%
                   
@@ -179,9 +186,9 @@
                </tbody>
             </table>
             <div>
-               <a href="notice.jsp">목록</a>      
+               <a href="notice">목록</a>      
                <a href="notice-edit?c=${n.code}">수정</a>
-               <a href="notice-del-proc.jsp?c=${n.code}">삭제</a>
+               <a href="notice-del?c=${n.code}">삭제</a>
             </div>
 				<div>
 					<ul>
@@ -191,7 +198,7 @@
 							<span>이전글이 없습니다.</span>
 							</c:if>
 							<c:if test="${not empty next}">
-							<a href="notice-detail.jsp?c=${prev.code}">${prev["title"]}</a>
+							<a href="notice-detail?c=${prev.code}">${prev["title"]}</a>
 							</c:if>
 						</li>
 						<li>
@@ -201,7 +208,7 @@
 							<span>다음 글이 없습니다.</span>
 							</c:if>
 							<c:if test="${not empty next}">
-							<a href="notice-detail.jsp?c=${next.code}">${next["title"]}</a>
+							<a href="notice-detail?c=${next.code}">${next["title"]}</a>
 							</c:if>
 						</li>
 					</ul>
