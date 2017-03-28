@@ -4,45 +4,100 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-#jaega{
-	width: 700px;
-	height: 500px;
-	border: solid 1px indigo;
-}
-#toolbar{
-	background: gray;
-	height: 100px;
-}
-#room{
-	background: yellow;
-	height: 400px;
-}
+	@keyframes zoom-in{
+		from{
+			width:100px;
+		}
 
-#room div{
-	background: green;
-	width: 100px;
-	height: 50px;
-	transition-duration: 0.5s ;
-	transition-timing-function: steps(3,start);
-/* 	transition-property: width,opacity;
-	transition-timing-function: ease-in-out; */
-}
-#room div:hover{
-	transform-origin: right top;
-	transform: skew(-32deg, 23deg) ;
-/* 	width: 200px;
-	height: 200px;
-	opacity: 0.2; */
-	/* transform: rotate(7.5deg); */
+		to{
+			width: 300px;
+		}
+
+	}
+
+	#jaega{
+		width: 700px;
+		height: 500px;
+		border: solid 1px indigo;
+	}
+	#toolbar{
+		background: gray;
+		height: 100px;
+	}
+	#room{
+		position: relative;
+		background: yellow;
+		height: 400px;
+	}
+	
+	#room div{
+
+		left: 50px;
+		top: 10px;
+		position: absolute;
+		background: green;
+		width: 100px;
+		height: 50px;
+		transition-duration: 0.5s ;
+		transition-timing-function: steps(3,start);
+	/* 	transition-property: width,opacity;
+		transition-timing-function: ease-in-out; */
+	}
+	#room div:hover{
+		animation-name: zoom-in;
+		animation-duration: 1s;
+		animation-direction: normal;
+	}
+	/* 	transform-origin: right top;
+		transform: skew(-32deg, 23deg) ; */
+	/* 	width: 200px;
+		height: 200px;
+		opacity: 0.2; */
+		/* transform: rotate(7.5deg); */
 }
 </style>
+	<script>
+	window.addEventListener("load", function(){
+		
+		var zoomInButton = document.querySelector("#zoom-in-button");
+
+		zoomInButton.onclick = function(){
+
+			var divs = document.querySelectorAll("#room div");
+
+			var poses = [
+				{left:'100px',top:'200px'},
+				{left:'300px',top:'200px'},
+				{left:'500px',top:'200px'}
+			]
+	/* 		div.style.animationName = "zoom-in";
+			div.style["animation-duration"] = "1s"; */
+ 			
+			for(var i in divs){
+
+				divs[i].animate([
+					{left: divs[i].offsetLeft + 'px',top:divs[i].offsetTop + 'px'},
+					poses[i]
+					//{left:'200px',top:'200px'}
+				],1000); 
+			}
+			//div.style.left = "200px";
+			//div.style.top = "200px";
+		}
+	});
+	</script>
 </head>
 <body>
 	<h1>교실지옥</h1>
 	<div id="jaega">
 		<div id="toolbar">
+			<input id="zoom-in-button" type="button" value="zoom-in"/>
 		</div>
 		<div id="room">
+			<div>
+			</div>
+			<div>
+			</div>
 			<div>
 			</div>
 		</div>

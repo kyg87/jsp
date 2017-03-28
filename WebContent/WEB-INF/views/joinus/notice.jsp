@@ -276,6 +276,7 @@ nav>.h2 {
             </div>    
 			
 			<div>
+			<a href="notice-reg">글쓰기</a>
 				<span id ="more-button">더보기</span>
 			</div>
 			

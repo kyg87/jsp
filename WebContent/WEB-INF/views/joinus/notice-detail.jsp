@@ -181,7 +181,7 @@
             <div>
                <a href="notice.jsp">목록</a>      
                <a href="notice-edit?c=${n.code}">수정</a>
-               <a href="notice-del-proc.jsp?c=${n.code}">삭제</a>
+               <a href="notice-del?c=${n.code}">삭제</a>
             </div>
 				<div>
 					<ul>

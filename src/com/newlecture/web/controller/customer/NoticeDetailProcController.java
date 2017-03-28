@@ -20,7 +20,29 @@ import com.newlecture.web.data.view.NoticeView;
 @WebServlet("/joinus/notice-detail")
 public class NoticeDetailProcController extends HttpServlet{
 	   
-@Override
+	@Override
+		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String code = request.getParameter("c");
+
+		NoticeDao dao = new MySQLNoticeDao();
+		
+		NoticeView n = dao.get(code);
+		
+		NoticeView prev = dao.prev(code);
+		NoticeView next = dao.next(code);
+		
+		NoticeFileDao noticeFileDao = new MySQLNoticeFileDao();
+		
+		List<NoticeFile> list = noticeFileDao.getList(n.getCode());
+		
+		request.setAttribute("n", n);
+		request.setAttribute("prev", prev);
+		request.setAttribute("next", next);
+		request.setAttribute("list", list);
+		/*request.getRequestDispatcher("/WEB-INF/views/joinus/notice-reg.jsp").forward(request, response);*/
+		request.getRequestDispatcher("/WEB-INF/views/joinus/notice-detail.jsp").forward(request, response);
+		}
+/*@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 
@@ -41,7 +63,7 @@ public class NoticeDetailProcController extends HttpServlet{
 	request.setAttribute("prev", prev);
 	request.setAttribute("next", next);
 	request.setAttribute("list", list);
-	/*request.getRequestDispatcher("/WEB-INF/views/joinus/notice-reg.jsp").forward(request, response);*/
+	request.getRequestDispatcher("/WEB-INF/views/joinus/notice-reg.jsp").forward(request, response);
 	request.getRequestDispatcher("/WEB-INF/views/joinus/notice-detail.jsp").forward(request, response);
- }			
+ }*/			
 }
