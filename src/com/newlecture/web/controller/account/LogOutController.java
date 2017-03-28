@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class LogOutController
  */
-@WebServlet("/LogOutController")
+@WebServlet("/logout")
 public class LogOutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -18,7 +18,7 @@ public class LogOutController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.getSession().invalidate();
-		response.sendRedirect("../index");
+		response.sendRedirect("index");
 
 	}
 

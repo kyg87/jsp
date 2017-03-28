@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.newlecture.web.dao.mysql.MySQLNoticeDao;
 import com.newlecture.web.dao.mysql.MySQLNoticeFileDao;
@@ -48,7 +49,7 @@ public class NoticeRegProcController extends HttpServlet{
 		out.println("1");
 		
 		
-
+	 
 		
 	 	
 			
