@@ -1,7 +1,9 @@
 eclipse.preferences.version=1
 encoding//WebContent/WEB-INF/views/account/login.jsp=UTF-8
-encoding//WebContent/WEB-INF/views/joinus/notice.jsp=UTF-8
+encoding//WebContent/WEB-INF/views/inc/layout.jsp=UTF-8
 encoding//WebContent/calc.jsp=UTF-8
+encoding//src/Add.java=UTF-8
+encoding//src/DataView.java=UTF-8
 encoding//src/Nana.java=UTF-8
 encoding//src/com/newlecture/web/dao/mysql/MySQLMemberDao.java=UTF-8
 encoding//src/com/newlecture/web/dao/mysql/MySQLNoticeDao.java=UTF-8

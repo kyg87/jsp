@@ -36,18 +36,25 @@
 		top: 10px;
 		position: absolute;
 		background: green;
+		border-radius: 10px;
+		box-shadow: 1px 2px 2px #979797;
 		width: 100px;
 		height: 50px;
 		transition-duration: 0.5s ;
-		transition-timing-function: steps(3,start);
+		transition-property: left,top,transform;
+		transition-timing-function: ease-out,ease-out,ease-in-out;
+		
+		
+		
+		/* transition-timing-function: steps(3,start); */
 	/* 	transition-property: width,opacity;
 		transition-timing-function: ease-in-out; */
 	}
-	#room div:hover{
+/* 	#room div:hover{
 		animation-name: zoom-in;
 		animation-duration: 1s;
 		animation-direction: normal;
-	}
+	} */
 	/* 	transform-origin: right top;
 		transform: skew(-32deg, 23deg) ; */
 	/* 	width: 200px;
@@ -56,7 +63,34 @@
 		/* transform: rotate(7.5deg); */
 }
 </style>
-	<script>
+<script>
+window.addEventListener("load", function(){
+	
+		var room = document.querySelector("#room");
+		var divs = document.querySelectorAll("#room div");
+		var zoomInButton = document.querySelector("#zoom-in-button");
+		
+		room.onclick = function(event){
+			if(event.target !== event.currentTarget){
+				alert("안녕~");
+				event.target.style.border = "2px solid blue";
+				event.currentTarget.style.border = "2px solid red";
+				}
+			};
+		
+		zoomInButton.onclick = function(){
+			//alert("!!!");
+			for(var i =0; i<divs.length;i++){
+				divs[i].style.left = divs[i].dataset.dx;
+				divs[i].style.top = divs[i].dataset.dy;
+				divs[i].style.transform = "rotate(360deg)";
+				divs[i].style.transitionDelay = (i/3) +"s" ;
+				//divs[i].onclick = function(){alert("안녕~");};
+			}
+		};
+});
+</script>
+	<!-- <script>
 	window.addEventListener("load", function(){
 		
 		var zoomInButton = document.querySelector("#zoom-in-button");
@@ -85,7 +119,7 @@
 			//div.style.top = "200px";
 		}
 	});
-	</script>
+	</script> -->
 </head>
 <body>
 	<h1>교실지옥</h1>
@@ -94,12 +128,16 @@
 			<input id="zoom-in-button" type="button" value="zoom-in"/>
 		</div>
 		<div id="room">
-			<div>
-			</div>
-			<div>
-			</div>
-			<div>
-			</div>
+			<div data-sx="" data-sy="" data-dx="100px" data-dy="100px">1</div>
+         <div data-sx="" data-sy="" data-dx="220px" data-dy="100px">2</div>
+         <div data-sx="" data-sy="" data-dx="340px" data-dy="100px">3</div>
+         <div data-sx="" data-sy="" data-dx="460px" data-dy="100px">4</div>
+         <div data-sx="" data-sy="" data-dx="100px" data-dy="200px">5</div>
+         <div data-sx="" data-sy="" data-dx="220px" data-dy="200px">6</div>
+         <div data-sx="" data-sy="" data-dx="340px" data-dy="200px">7</div>
+         <div data-sx="" data-sy="" data-dx="460px" data-dy="200px">8</div>   
+			
+			
 		</div>
 	</div>
 </body>
