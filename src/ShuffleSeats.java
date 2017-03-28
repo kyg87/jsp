@@ -6,9 +6,14 @@ public class ShuffleSeats {
 	
 	private Seat[] arraySeat ;
 	
+	private int _groupCapa;
+	private int _seatCapa;
+	
 	public ShuffleSeats(int groupCapa,int seatCapa)
 	{
 		arraySeat = new Seat[groupCapa * seatCapa];
+		_groupCapa= groupCapa;
+		_seatCapa = seatCapa;
 	}
 	
 	public void add(int group,int seatIndex,String userName)
@@ -46,14 +51,14 @@ public class ShuffleSeats {
 	
 	private void setSeats()
 	{
-		for(int i = 0; i < 5 * 3;i++){
-			arraySeat[i].setSeat(i/3, i%3);
+		for(int i = 0; i < _groupCapa * _seatCapa;i++){
+			arraySeat[i].setSeat(i/_seatCapa, i%_seatCapa);
 		}
 	}
 	
 	public void printe()
 	{
-		for(int i = 0; i < 5 * 3;i++){
+		for(int i = 0; i < _groupCapa * _seatCapa;i++){
 			
 			System.out.printf("%d %d %s \n", arraySeat[i].getGroup(),arraySeat[i].getIndex(),arraySeat[i].getUserName());
 			
