@@ -17,7 +17,7 @@
                </ul>
             </div>
                
-            <form action="" method="post" enctype="multipart/form-data">
+            <form method="post" >
             <table border="1">
                <tbody>
                   <tr>
@@ -37,7 +37,7 @@
             </table>
             <div>      
                <input type="submit" value="등록" />         
-               <a href="notice.jsp">취소</a>
+               <a href="notice">취소</a>
             </div>
             </form>            
          </main>

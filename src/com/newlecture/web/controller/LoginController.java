@@ -64,10 +64,10 @@ public class LoginController extends HttpServlet{
 			request.setAttribute("validate", validate);
 			request.getRequestDispatcher("/WEB-INF/views/account/login.jsp").forward(request, response);
 		}
-		/*PrintWriter out = response.getWriter();
+		PrintWriter out = response.getWriter();
 		
 		out.println(id + " , " + pwd );
-		*/
+		
 	}
 
 }
