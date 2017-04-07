@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(function() {
+	
+	var getButton = $("#get-button");
+	var jsonButton = $("#json-button");
+	var scriptButton = $("#script-button");
+	var loadButton = $("#load-button");
+	
+
+	getButton.click(function(){
+		
+		/* $.ajax("../rome.html")
+		 .done(function(data){
+			alert(data); 
+		 }); */
+		
+		/* $.ajax({
+			url:"../rome.html",
+			complete: function(xhr,status){
+				alert(xhr.responseText);
+			}
+		}); */
+		
+		$.getJSON("../ajax-data.jsp",function(data){
+			alert(data[0].writerName);
+		});
+	});
+	
+});
+
+</script>
+</head>
+<body>
+	<div>
+		<input id="get-button" type="button" value="get"/>
+		<input id="json-button" type="button" value="getJSON"/>
+		<input id="script-button" type="button" value="getScript"/>
+		<input id="load-button" type="button" value="load"/>
+	</div>
+</body>
+</html>

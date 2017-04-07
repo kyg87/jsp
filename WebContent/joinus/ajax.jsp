@@ -484,7 +484,7 @@ Latest compiled and minified JavaScript
 									request.onload = function(){	
 										//if(request.readyState ==4) {
 										var notices = JSON.parse(request.responseText);
-										
+										console.log(notices);
 										var template = document.querySelector("#notice-row");
 										
 										for(var i in notices){
