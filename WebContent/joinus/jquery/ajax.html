@@ -27,8 +27,22 @@ $(function() {
 			}
 		}); */
 		
-		$.getJSON("../ajax-data.jsp",function(data){
+	/* 	$.getJSON("../ajax-data.jsp",function(data){
 			alert(data[0].writerName);
+		}); */
+	 	/* $.getScript("script.js",function(){
+			alert("a1");
+		})
+		.done(function(){
+			alert("a2");
+		});  */
+		//$("body div:last-child").load("../notice-reg-partial.jsp");
+		
+		var data = $("#form").serialize();
+		alert(data);
+		
+		$.post("post-proc.jsp",data,function(d){
+			alert(d)
 		});
 	});
 	
@@ -42,6 +56,35 @@ $(function() {
 		<input id="json-button" type="button" value="getJSON"/>
 		<input id="script-button" type="button" value="getScript"/>
 		<input id="load-button" type="button" value="load"/>
+	</div>
+	<div>
+	<form id="form" >
+       
+       <table border="1">
+          <tbody>
+             <tr>
+               <th>제목</th>
+               <td><input type="text" name="title" /></td>
+             </tr>
+             <tr>
+               <th>첨부파일<progress value="0" max="100"/></th>
+               <td><input type="file" name="file2" /></td>
+             </tr>
+             <tr>
+             	<th>내용</th>                  
+               <td colspan="2">
+               	<textarea rows="20" cols="80" name="content"></textarea>
+               </td>
+             </tr>   
+          </tbody>
+       </table>
+       
+       <div>      
+          <!-- <input class="reg-button" type="button" value="등록" /> -->         
+          <a href="notice.jsp">취소</a>
+       </div>
+       
+	</form>
 	</div>
 </body>
 </html>
