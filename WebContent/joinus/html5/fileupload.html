@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>File upload</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<style>
+   #upload-zone{
+      background-color:yellow;
+      width: 500px;
+      height: 300px;
+   }
+
+    #drag-zone {
+        background-color: gray;
+        width: 500px;
+        height: 200px;
+    }
+
+    #upload-zone.enter {
+        background-color: deeppink;
+    }
+
+    #drag-zone > div {
+        background-color: blue;
+        width: 100px;
+        height: 200px;
+    }    
+    
+   input[type='file'] {
+      display: none;
+   }
+
+    img {
+      width: 100px;
+      height: 100px;
+   }
+</style>
+<script>
+    $(function(){
+      /* 
+        //이벤트 버블링 또는 통지를 이용하기
+        $("#drag-zone").get(0).addEventListener("click",function(e){
+            e.stopPropagation();
+            alert("zone");
+        },true);
+
+        $("#drag-zone > div").get(0).addEventListener("click",function(){
+            alert("div");
+        },true);
+
+        $("#drag-zone > img").click(function(e){
+            e.preventDefaul();
+            e.stopPropagation();
+
+            alert("img");
+        });
+
+
+       $("#drag-zone").click(function(){
+            alert("zone");
+        });
+        $("#drag-zone > div").click(function(e){
+            e.stopPropagation();
+            alert("div");
+        });
+        
+        $("#upload-zone").click(function(){
+            $("input[type='file']").trigger("click");
+        });
+        
+          */
+        $("#drag-zone > a").bind("dragstart",function(event){
+
+            var dt = event.originalEvent.dataTransfer;
+
+            dt.setData("text/plain", "http://www.mozilla.org");
+            console.log("start");
+        });
+        
+      
+        $("#upload-zone").bind("dragenter",function(){
+            $(this).addClass("enter");
+            console.log("enter");
+        });
+        
+      /* 
+        $("#upload-zone").bind("dragover",function(){
+            console.log("over");
+        });
+         */
+      
+        $("#upload-zone").bind("dragleave",function(){
+            $(this).removeClass("enter");
+            console.log("leave");
+        });
+        
+      
+        $("#upload-zone").bind("drop",function(){
+            console.log("drop");
+        });
+       
+
+    });
+
+    /* 
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+    }
+     */
+    
+</script>
+</head>
+<body>
+   <div id="upload-zone">
+      업로드할 파일 선택 혹은 끌어넣기
+   </div>
+   <div id="drag-zone">
+      <a draggable="true" href="http://www.google.com">헤헤</a>
+        <img src="../../images/1.jpg" />
+   </div>
+   <input type="file" />
+</body>
+</html>
